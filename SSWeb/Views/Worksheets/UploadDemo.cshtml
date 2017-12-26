@@ -1,0 +1,72 @@
+﻿@model SSWeb.Models.Worksheet
+
+@{
+    ViewBag.Title = "CreateWorksheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+#file {
+   display: none;
+}
+   
+.dummyfile input[type="text"] {
+   width: 120px;
+   display: inline;
+   }
+</style>
+<script>
+$(document).ready(function(){
+ 
+ $('#fileselectbutton').click(function(e){
+  $('#file').trigger('click');
+ });
+    
+ $('#file').change(function(e){
+  var val = $(this).val();
+   
+  var file = val.split(/[\\/]/);
+   
+  $('#filename').val(file[file.length-1]);
+ });
+});
+
+</script>
+<h1>Upload Worksheet (Step 1 of 2)</h1>
+<hr />
+    <div class="row">
+    <div class="span6">
+    
+        <div class="alert alert-info">
+        <ul>
+    <li>Files must be .xls or .xlsx format</li>
+    <li>The first 12 columns, and 30 rows (A1:L30) will be uploaded</li>
+    <li>Files must be 1MB or less in size</li>
+    <li>All macros will be disabled</li>
+    <li>Supported functions: SUM(), PRODUCT(), +, -, *, /</li>
+    </ul>
+    </div>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-error">        
+            @ViewBag.ErrorMessage
+        </div>
+    }
+            @using (Html.BeginForm("UploadDemo", "Worksheets", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            
+                <input type="file" name="file" data-val="true" data-val-required="File is required" />
+                <br />
+                <br />
+                <button class="btn btn-primary">Upload</button>
+                //<input type="submit" value="Upload"/>
+        }
+    </div>
+    
+
+
+</div>
+
+
+
+</div>
+    

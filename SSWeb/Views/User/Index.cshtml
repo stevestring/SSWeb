@@ -1,0 +1,24 @@
+﻿@model SSWeb.Models.User
+
+@{
+    ViewBag.Title = Model.UserID;
+    ViewBag.MyWorksheets = "class=active";
+}
+
+@*<h1>@Model.UserID</h1>*@
+<div class="hidden-phone">
+<h1>@Model.UserID's Worksheets</h1>
+</div>
+    <table class="table">
+    @foreach (SSWeb.Models.Worksheet w in Model.OwnedWorksheets)
+    {
+    <tr>
+        <td>@Html.ActionLink(w.Name, "Details", "Worksheets",new { id = w.WorksheetId },null)</td>
+        <td>@w.Description</td>
+        <td>@Html.ActionLink("Edit", "Edit", "Worksheets",new { id = w.WorksheetId },null)</td>
+        <td>@Html.ActionLink("Delete", "Delete", "Worksheets",new { id = w.WorksheetId },null)</td>
+    </tr>
+    }
+    </table>
+    <hr />
+    <a class="btn btn-primary" href="../Worksheets/Upload">Upload New</a>

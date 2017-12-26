@@ -1,0 +1,9 @@
+this is a test
+
+FileVersionInfo = {File:             C:\WINDOWS\system32\notepad.exe
+InternalName:     Notepad
+OriginalFilename: NOTEPAD.EXE
+FileVersion:      5.1.2600.5512 (xpsp.080413-2105)
+FileDescription:  Notepad
+Product:          Microsoft® Windows® Operating System
+ProductVersi...

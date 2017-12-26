@@ -1,0 +1,22 @@
+﻿@model SSWeb.Models.Worksheets
+
+@{
+    ViewBag.Title = "Published Worksheets";
+    ViewBag.PublicWorksheets = "class=active";
+}
+
+<h1>Worksheet Directory</h1>
+@*<h3>These worksheets have been created by 360Cells.com users.</h3>*@
+    <table class="table">
+    @foreach (SSWeb.Models.Worksheet w in Model)
+    {
+    <tr>
+        <td>@Html.ActionLink(w.Name, "Details", new { id = w.WorksheetId })</td>
+        <td>@w.Description</td>
+        <td>@w.Owner</td>
+        
+    </tr>
+    }
+    </table>
+    <hr />
+    <a class="btn btn-primary" href="../Worksheets/Upload">Upload New</a>

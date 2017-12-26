@@ -1,0 +1,11 @@
+﻿@model SSWeb.Models.Worksheet
+
+@{
+    ViewBag.Title = @Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<meta http-equiv=”refresh” content=”2" >
+<h2>@Model.Name</h2>
+
+<img src = "../../Content/images/blue_wait_cursor.gif" />
+<h3>This worksheet is currently being processed.  Your worksheet should be ready within a few seconds</h3>

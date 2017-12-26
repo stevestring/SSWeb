@@ -1,0 +1,71 @@
+﻿@model SSWeb.Models.Worksheet
+<style>
+input[type="text"]
+{
+    padding:0px;
+    margin-bottom:5px;
+}​ 
+
+</style>
+ 
+@if (@Model.Failed)
+{
+    <div class="alert alert-error">  
+    <p><strong>Oops... We had a problem converting your worksheet.</strong></p>
+    <p>@Model.ErrorMessage</p>
+    </div>
+}
+else
+{
+
+if (Model.Cells != null)
+{
+<table table-condensed>
+@foreach (int r in Model.Cells.Keys)
+{
+
+    <tr>
+    @foreach (int c in Model.Cells[r].Keys)
+    {
+        
+        SSWeb.Models.Worksheet.Cell cell = Model.Cells[r][c];
+       
+        <td>
+        @if (cell.formula != null)
+        {
+@*            <label style="color:#115566; font-weight:bold;font-size:30pt; font-family:Calibri" id ="@cell.cellAddress" >@cell.value</label>*@
+                    <label id ="@cell.cellAddress" @cell.style>@cell.value</label>
+        }
+        else
+        {
+            if (!cell.readOnly)
+            {
+                <input class = "input-small" type="number" value= "@cell.value" id ="@cell.cellAddress"  /> 
+            }
+            else
+            {
+              <label @cell.style>@cell.value</label>
+            }
+        }
+        
+        </td>
+    }        
+    </tr>
+    
+}
+</table>
+<hr />
+<button class="btn" id="button1" type="button">Calculate</button>
+
+<script>
+@Model.DynamicScript
+</script>
+    
+
+}
+else
+{
+    <h2>This worksheet is empty.</h2>
+}
+
+}

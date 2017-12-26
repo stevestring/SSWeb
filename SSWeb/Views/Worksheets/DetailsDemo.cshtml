@@ -1,0 +1,50 @@
+﻿@model SSWeb.Models.Worksheet
+<script type ="text/javascript">
+    var site = site || {};
+    site.baseUrl = site.baseUrl || "";
+
+    $(document).ready(function (e) {
+
+        // locate each partial section.
+        // if it has a URL set, load the contents into the area.
+
+        $(".partialContents").each(function (index, item) {
+            var url = site.baseUrl + $(item).data("url");
+            if (url && url.length > 0) {
+                $(item).load(url);
+            }
+        });
+
+        // DEMO ONLY - JUST IGNORE
+        // Just to make the loading time obvious....
+        $("a").click(function () {
+            $("body").html("");
+        });
+    });
+</script>
+@{
+    ViewBag.Title = @Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.Name</h2>
+<hr />
+<div class ="partialContents" data-url ="/Worksheets/Worksheet/@Model.WorksheetId">
+<center><img src = "../../Content/images/blue_wait_cursor.gif" /></center>
+<center>Processing... </center>
+<br />
+<center>If this is a new worksheet, the import process will typically complete in less than a minute</center>
+<center>Once uploaded and processed, this worksheet will load instantly.</center>
+</div>
+<hr/>
+<div class="alert alert-success">
+<strong>Congratulations! </strong>
+<p>You have successfully uploaded your first worksheet.</p>
+<p>This demo worksheet will eventually be removed but as a <a href="/Account/Register">registered user</a>, you will be free to upload as many spreasheets as you like - all for free!</p>
+</div>
+    
+    
+<!--
+@Html.Partial("Worksheet", @Model)
+-->
+
+
