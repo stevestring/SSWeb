@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+            <rules>
+                <clear />
+                <rule name="Canonical Host Name Site 1" enabled="true" stopProcessing="true">
+                    <match url="(.*)" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^www\.360cells\.com$" />
+                    </conditions>
+                    <action type="Redirect" url="http://360cells.com/{R:1}" />
+                </rule>
+                <rule name="Canonical Host Name Site 2" enabled="true" stopProcessing="true">
+                    <match url="(.*)" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^www\.bGoggles\.com$" />
+                    </conditions>
+                    <action type="Redirect" url="http://bGoggles.com/{R:1}" />
+                </rule>
+                <rule name="Canonical Host Name Site 3" enabled="true" stopProcessing="true">
+                    <match url="(.*)" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^www\.site3\.com$" />
+                    </conditions>
+                    <action type="Redirect" url="http://site3.com/{R:1}" />
+                </rule>
+
+                <rule name="Site 1" enabled="true" stopProcessing="true">
+                    <match url="(.*)" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^(www\.)?360cells\.com$" />
+                        <add input="{PATH_INFO}" pattern="^/360cells($|/)" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="\360cells\{R:0}" />
+                </rule>
+                <rule name="Site 2" enabled="true" stopProcessing="true">
+                    <match url="(.*)" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^(www\.)?bGoggles\.com$" />
+                        <add input="{PATH_INFO}" pattern="^/bGoggles($|/)" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="\bGoggles\{R:0}" />
+                </rule>
+                <rule name="Site 3" enabled="true" stopProcessing="true">
+                    <match url="(.*)" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^(www\.)?site3\.com$" />
+                        <add input="{PATH_INFO}" pattern="^/site3($|/)" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="\site3\{R:0}" />
+                </rule>
+
+            </rules>
+        </rewrite>
+        <urlCompression doStaticCompression="true" doDynamicCompression="true" />
+    </system.webServer>
+</configuration>
